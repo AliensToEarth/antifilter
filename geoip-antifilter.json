@@ -1,0 +1,44 @@
+{
+  "input": [
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "antifilter",
+        "uri": "https://antifilter.download/list/allyouneed.lst",
+        "onlyIPType": "ipv4"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "antifilter-community",
+        "uri": "https://community.antifilter.download/list/community.lst",
+        "onlyIPType": "ipv4"
+      }
+    },
+    {
+      "type": "dbipCountryMMDB",
+      "action": "add",
+      "args": {
+        "uri": "./db-ip/dbip-country-lite.mmdb"
+      }
+    },
+    {
+      "type": "private",
+      "action": "add"
+    }
+  ],
+  "output": [
+    {
+      "type": "v2rayGeoIPDat",
+      "action": "output",
+      "args": {
+        "outputDir": "../output",
+        "outputName": "geoip-antifilter.dat",
+        "wantedList": ["cn", "us", "antifilter", "antifilter-community", "private"]
+      }
+    }
+  ]
+}

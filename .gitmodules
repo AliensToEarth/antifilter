@@ -1,0 +1,6 @@
+[submodule "geosite"]
+	path = geosite
+	url = git@github.com:v2fly/domain-list-community.git
+[submodule "geoip"]
+	path = geoip
+	url = git@github.com:v2fly/geoip.git
