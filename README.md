@@ -76,17 +76,6 @@ Targets have proper dependencies to ensure correct execution order:
 - Clean target uses `-` prefix to ignore missing files
 - Each step provides clear status messages
 
-## Comparison with run.sh
-
-| Original run.sh | Makefile Equivalent |
-|----------------|-------------------|
-| `./run.sh` | `make` or `make all` |
-| Git submodule setup | `make submodule-init` |
-| Git submodule updates | `make submodule-update` |
-| Manual execution | `make geoip` or `make geosite` |
-| No cleanup | `make clean` |
-| No help | `make help` |
-
 ## Advanced Usage
 
 ### Dry Run
