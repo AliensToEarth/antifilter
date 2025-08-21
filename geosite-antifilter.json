@@ -1,0 +1,22 @@
+{
+    "input": [
+        {
+            "type": "readGeoSiteDat",
+            "action": "add",
+            "args": {
+                "path": "../output/geosite.dat"
+            }
+        }
+    ],
+    "output": [
+        {
+            "type": "v2rayGeoSiteDat",
+            "action": "output",
+            "args": {
+                "outputDir": "../output",
+                "outputName": "geosite-antifilter.dat",
+                "wantedList": ["google", "youtube", "meta", "antifilter-comunity", "openai", "anthropic", "private"]
+            }
+        }
+    ]
+}

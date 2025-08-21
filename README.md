@@ -33,7 +33,7 @@ make clean
 
 - **`make all`** (default) - Runs both geoip and geosite workflows
 - **`make geoip`** - Complete geoip workflow: submodule-init → download → extract → build
-- **`make geosite`** - Complete geosite workflow: submodule-init → download → build
+- **`make geosite`** - Complete geosite workflow: submodule-init → download → build → parse
 
 ### Setup Targets
 
@@ -50,6 +50,7 @@ make clean
 
 - **`make geosite-download`** - Download antifilter community domains list
 - **`make geosite-build`** - Build geosite data with specified filters
+- **`make geosite-parse`** - Process geosite data with antifilter configuration
 
 ### Utility Targets
 
@@ -70,6 +71,10 @@ Targets have proper dependencies to ensure correct execution order:
 - `geoip-extract` depends on `geoip-download`
 - `geoip-build` depends on `geoip-extract`
 - Both `geoip` and `geosite` depend on `submodule-init`
+- `geosite-parse` depends on `geosite-build` and runs automatically
+
+### GeoSite Parser Integration
+The geosite workflow now includes an additional parsing step that processes the generated `geosite.dat` file using the `geosite-antifilter.json` configuration. This creates filtered output files containing only specified domain lists (google, youtube, meta, antifilter-community, private).
 
 ### Error Handling
 - Commands use proper error propagation
@@ -115,4 +120,16 @@ make --dry-run help
 make help | grep "Year/Month"
 
 # Test individual targets
-make --dry-run geoip-pull
+make --dry-run geosite-parse
+```
+
+## GeoSite Parser
+
+The project includes a custom geosite parser utility located in the `geosite-parser/` directory. This utility:
+
+- Processes the generated `geosite.dat` file
+- Uses `geosite-antifilter.json` configuration
+- Creates filtered output with specific domain lists
+- Runs automatically after `make geosite`
+
+For detailed information about the parser, see [`geosite-parser/README.md`](geosite-parser/README.md).

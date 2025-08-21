@@ -7,7 +7,9 @@ MONTH := $(shell date +%m)
 DBIP_URL := https://download.db-ip.com/free/dbip-country-lite-$(YEAR)-$(MONTH).mmdb.gz
 GEOIP_DIR := geoip
 GEOSITE_DIR := geosite
+GEOSITE_PARSER_DIR := geosite-parser
 GEOIP_CONFIG := geoip-antifilter.json
+GEOSITE_CONFIG := geosite-antifilter.json
 DBIP_FILE := dbip-country-lite.mmdb.gz
 DBIP_EXTRACTED := dbip-country-lite.mmdb
 ANTIFILTER_FILE := antifilter-comunity
@@ -15,7 +17,7 @@ ANTIFILTER_FILE := antifilter-comunity
 # Phony targets
 .PHONY: all geoip geosite clean help submodule-init submodule-update
 .PHONY: geoip-download geoip-extract geoip-build
-.PHONY: geosite-download geosite-build
+.PHONY: geosite-download geosite-build geosite-parse
 
 # Default target
 all: submodule-init geoip geosite
@@ -24,7 +26,7 @@ all: submodule-init geoip geosite
 geoip: submodule-init geoip-download geoip-extract geoip-build
 
 # Main geosite workflow
-geosite: submodule-init geosite-download geosite-build
+geosite: submodule-init geosite-download geosite-build geosite-parse
 
 # Submodule initialization
 submodule-init:
@@ -70,7 +72,12 @@ geosite-download:
 
 geosite-build: geosite-download
 	@echo "Building geosite data..."
-	cd $(GEOSITE_DIR) && go run ./ --outputdir=../output --outputname="geosite-antifilter.dat"
+	cd $(GEOSITE_DIR) && go run ./ --outputdir=../output --outputname="geosite.dat"
+
+geosite-parse: geosite-build
+	@echo "Processing geosite data with antifilter configuration..."
+	cd $(GEOSITE_PARSER_DIR) && go mod tidy
+	cd $(GEOSITE_PARSER_DIR) && go run ./ -c ../$(GEOSITE_CONFIG)
 
 # Utility targets
 clean:
@@ -80,6 +87,7 @@ clean:
 	-rm -rf $(GEOIP_DIR)/db-ip
 	-rm -f $(GEOSITE_DIR)/data/$(ANTIFILTER_FILE)
 	-rm -rf output
+	-rm -f $(GEOSITE_PARSER_DIR)/go.sum
 
 help:
 	@echo "Available targets:"
@@ -99,6 +107,7 @@ help:
 	@echo "Individual geosite targets:"
 	@echo "  geosite-download - Download antifilter community domains"
 	@echo "  geosite-build    - Build geosite data with filters"
+	@echo "  geosite-parse    - Process geosite data with antifilter configuration"
 	@echo ""
 	@echo "Utility targets:"
 	@echo "  clean        - Remove downloaded and generated files"
