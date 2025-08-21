@@ -12,7 +12,7 @@ GEOIP_CONFIG := geoip-antifilter.json
 GEOSITE_CONFIG := geosite-antifilter.json
 DBIP_FILE := dbip-country-lite.mmdb.gz
 DBIP_EXTRACTED := dbip-country-lite.mmdb
-ANTIFILTER_FILE := antifilter-comunity
+ANTIFILTER_FILE := antifilter-community
 
 # Phony targets
 .PHONY: all geoip geosite clean help submodule-init submodule-update

@@ -15,7 +15,7 @@
             "args": {
                 "outputDir": "../output",
                 "outputName": "geosite-antifilter.dat",
-                "wantedList": ["google", "youtube", "meta", "antifilter-comunity", "openai", "anthropic", "private"]
+                "wantedList": ["google", "youtube", "meta", "antifilter-community", "openai", "anthropic", "private", "spotify"]
             }
         }
     ]
