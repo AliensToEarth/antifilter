@@ -87,7 +87,6 @@ clean:
 	-rm -rf $(GEOIP_DIR)/db-ip
 	-rm -f $(GEOSITE_DIR)/data/$(ANTIFILTER_FILE)
 	-rm -rf output
-	-rm -f $(GEOSITE_PARSER_DIR)/go.sum
 
 help:
 	@echo "Available targets:"
