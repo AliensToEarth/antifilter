@@ -4,6 +4,14 @@
       "type": "text",
       "action": "add",
       "args": {
+        "name": "telegram",
+        "uri": "https://core.telegram.org/resources/cidr.txt"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
         "name": "youtube",
         "uri": "https://raw.githubusercontent.com/touhidurrr/iplist-youtube/main/lists/cidr4.txt",
         "onlyIPType": "ipv4"
@@ -46,7 +54,7 @@
       "args": {
         "outputDir": "../output",
         "outputName": "geoip-antifilter.dat",
-        "wantedList": ["cn", "us", "youtube" ,"antifilter", "antifilter-community", "private"]
+        "wantedList": ["cn", "us", "youtube", "telegram", "antifilter", "antifilter-community", "private"]
       }
     }
   ]

@@ -23,6 +23,7 @@
                     "tidal",
                     "twitch",
                     "meta",
+                    "telegram",
                     "openai",
                     "anthropic",
                     "deepseek",
@@ -30,6 +31,7 @@
                     "github",
                     "npmjs",
                     "slack",
+                    "discord",
                     "lenovo",
                     "antifilter-community",
                     "private"
