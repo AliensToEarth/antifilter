@@ -4,6 +4,14 @@
       "type": "text",
       "action": "add",
       "args": {
+        "name": "wb-mortalkombat",
+        "uri": "../custom-geoip/wb-mortalkombat"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
         "name": "telegram",
         "uri": "https://core.telegram.org/resources/cidr.txt"
       }
@@ -54,7 +62,7 @@
       "args": {
         "outputDir": "../output",
         "outputName": "geoip-antifilter.dat",
-        "wantedList": ["cn", "us", "youtube", "telegram", "antifilter", "antifilter-community", "private"]
+        "wantedList": ["cn", "us", "youtube", "telegram", "antifilter", "antifilter-community", "wb-mortalkombat", "private"]
       }
     }
   ]
