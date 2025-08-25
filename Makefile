@@ -16,17 +16,17 @@ ANTIFILTER_FILE := antifilter-community
 
 # Phony targets
 .PHONY: all geoip geosite clean help submodule-init submodule-update
-.PHONY: geoip-download geoip-extract geoip-build
-.PHONY: geosite-download geosite-build geosite-parse
+.PHONY: geoip-download geoip-build
+.PHONY: geosite-download geosite-build
 
 # Default target
 all: submodule-init geoip geosite
 
 # Main geoip workflow
-geoip: submodule-init geoip-download geoip-extract geoip-build
+geoip: submodule-init geoip-download geoip-build
 
 # Main geosite workflow
-geosite: submodule-init geosite-download geosite-build geosite-parse
+geosite: submodule-init geosite-download geosite-build
 
 # Submodule initialization
 submodule-init:
@@ -54,14 +54,11 @@ submodule-update:
 geoip-download:
 	@echo "Downloading DB-IP database for $(YEAR)-$(MONTH)..."
 	cd $(GEOIP_DIR) && curl -L -o $(DBIP_FILE) $(DBIP_URL)
-
-geoip-extract: geoip-download
-	@echo "Extracting and organizing DB-IP database..."
 	cd $(GEOIP_DIR) && gzip -d $(DBIP_FILE)
 	cd $(GEOIP_DIR) && mkdir -p db-ip
 	cd $(GEOIP_DIR) && mv dbip-country-lite*.mmdb ./db-ip/$(DBIP_EXTRACTED)
 
-geoip-build: geoip-extract
+geoip-build:
 	@echo "Building geoip data..."
 	cd $(GEOIP_DIR) && go run ./ -c ../$(GEOIP_CONFIG)
 
@@ -70,14 +67,12 @@ geosite-download:
 	@echo "Downloading antifilter community domains..."
 	cd $(GEOSITE_DIR) && curl -L "https://community.antifilter.download/list/domains.lst" -o ./data/$(ANTIFILTER_FILE)
 
-geosite-build: geosite-download
+geosite-build: geosite-build
 	@echo "Building geosite data..."
 	cd $(GEOSITE_DIR) && go run ./ --outputdir=../output --outputname="geosite.dat"
-
-geosite-parse: geosite-build
-	@echo "Processing geosite data with antifilter configuration..."
 	cd $(GEOSITE_PARSER_DIR) && go mod tidy
 	cd $(GEOSITE_PARSER_DIR) && go run ./ -c ../$(GEOSITE_CONFIG)
+	rm ./output/geosite.dat
 
 # Utility targets
 clean:
@@ -100,13 +95,11 @@ help:
 	@echo ""
 	@echo "Individual geoip targets:"
 	@echo "  geoip-download - Download DB-IP country database"
-	@echo "  geoip-extract  - Extract and organize database file"
 	@echo "  geoip-build    - Build geoip data with configuration"
 	@echo ""
 	@echo "Individual geosite targets:"
 	@echo "  geosite-download - Download antifilter community domains"
 	@echo "  geosite-build    - Build geosite data with filters"
-	@echo "  geosite-parse    - Process geosite data with antifilter configuration"
 	@echo ""
 	@echo "Utility targets:"
 	@echo "  clean        - Remove downloaded and generated files"
