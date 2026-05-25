@@ -4,8 +4,32 @@
       "type": "text",
       "action": "add",
       "args": {
+        "name": "riot",
+        "uri": "../custom-geoip/riot"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
         "name": "wb-mortalkombat",
         "uri": "../custom-geoip/wb-mortalkombat"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "cloudflare",
+        "uri": "https://www.cloudflare.com/ips-v4/"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "cloudflare-ipv6",
+        "uri": "https://www.cloudflare.com/ips-v6/"
       }
     },
     {

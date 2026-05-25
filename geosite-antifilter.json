@@ -16,6 +16,8 @@
                 "outputDir": "../output",
                 "outputName": "geosite-antifilter.dat",
                 "wantedList": [
+                    "adobe",
+                    "autodesk",
                     "twitter",
                     "google",
                     "youtube",
