@@ -16,6 +16,7 @@
                 "outputDir": "../output",
                 "outputName": "geosite-antifilter.dat",
                 "wantedList": [
+                    "riot",
                     "adobe",
                     "autodesk",
                     "twitter",
@@ -36,6 +37,7 @@
                     "discord",
                     "lenovo",
                     "antifilter-community",
+                    "huobi",
                     "private"
                 ]
             }

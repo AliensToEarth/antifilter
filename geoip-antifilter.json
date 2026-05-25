@@ -86,7 +86,19 @@
       "args": {
         "outputDir": "../output",
         "outputName": "geoip-antifilter.dat",
-        "wantedList": ["cn", "us", "youtube", "telegram", "antifilter", "antifilter-community", "wb-mortalkombat", "private"]
+        "wantedList": [
+          "cn",
+          "us",
+          "riot",
+          "cloudflare",
+          "cloudflare-ipv6",
+          "youtube",
+          "telegram",
+          "antifilter",
+          "antifilter-community",
+          "wb-mortalkombat",
+          "private"
+        ]
       }
     }
   ]
