@@ -67,10 +67,9 @@ geosite-download:
 	@echo "Downloading antifilter community domains..."
 	cd $(GEOSITE_DIR) && curl -L "https://community.antifilter.download/list/domains.lst" -o ./data/$(ANTIFILTER_FILE)
 
-geosite-build: geosite-build
+geosite-build:
 	@echo "Building geosite data..."
 	cd $(GEOSITE_DIR) && go run ./ --outputdir=../output --outputname="geosite.dat"
-	cd $(GEOSITE_PARSER_DIR) && go mod tidy
 	cd $(GEOSITE_PARSER_DIR) && go run ./ -c ../$(GEOSITE_CONFIG)
 	rm ./output/geosite.dat
 

@@ -33,7 +33,7 @@ make clean
 
 - **`make all`** (default) - Runs both geoip and geosite workflows
 - **`make geoip`** - Complete geoip workflow: submodule-init → download → extract → build
-- **`make geosite`** - Complete geosite workflow: submodule-init → download → build → parse
+- **`make geosite`** - Complete geosite workflow: submodule-init → download → build (including parser step)
 
 ### Setup Targets
 
@@ -49,8 +49,7 @@ make clean
 ### Individual GeoSite Targets
 
 - **`make geosite-download`** - Download antifilter community domains list
-- **`make geosite-build`** - Build geosite data with specified filters
-- **`make geosite-parse`** - Process geosite data with antifilter configuration
+- **`make geosite-build`** - Build geosite data and run the parser with the antifilter configuration
 
 ### Utility Targets
 
@@ -62,7 +61,7 @@ make clean
 ### Dynamic Date Handling
 The Makefile automatically uses the current year and month for DB-IP database downloads:
 ```
-Current: https://download.db-ip.com/free/dbip-country-lite-2025-08.mmdb.gz
+Current format: https://download.db-ip.com/free/dbip-country-lite-YYYY-MM.mmdb.gz
 ```
 
 ### Dependency Management
@@ -71,7 +70,7 @@ Targets have proper dependencies to ensure correct execution order:
 - `geoip-extract` depends on `geoip-download`
 - `geoip-build` depends on `geoip-extract`
 - Both `geoip` and `geosite` depend on `submodule-init`
-- `geosite-parse` depends on `geosite-build` and runs automatically
+- `geosite-build` includes the parser step and runs automatically from `geosite`
 
 ### GeoSite Parser Integration
 The geosite workflow now includes an additional parsing step that processes the generated `geosite.dat` file using the `geosite-antifilter.json` configuration. This creates filtered output files containing only specified domain lists (google, youtube, meta, antifilter-community, private).
@@ -120,7 +119,7 @@ make --dry-run help
 make help | grep "Year/Month"
 
 # Test individual targets
-make --dry-run geosite-parse
+make --dry-run geosite-build
 ```
 
 ## GeoSite Parser
